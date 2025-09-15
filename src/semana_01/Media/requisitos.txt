@@ -1,0 +1,17 @@
+Programa deve receber nome completo do aluno,
+depois nome de disciplina e então todas as notas e depois fazer uma média simples.
+
+O programa deve ter um menu para
+1. inserir aluno
+2. inserir disciplina + notas
+3. visualizar lista de alunos
+4. visualizar disciplinas, dado o nome do aluno
+5. visualizar as notas e média
+6. sair
+
+Para armazenar os dados, pode ser usada uma estrutura de árvore binária sem reptição
+com uma classe aluno e essa classe aluno pode conter uma classe disciplina com o
+nome da disciplina e as notas em formato float ou double.
+
+Cada aluno terá nome único (será a "id") e cada aluno  pode ter n disciplinas com m notas,
+mas cada disciplina será única para cada aluno. As notas serão organizadas da maior para a menor.
