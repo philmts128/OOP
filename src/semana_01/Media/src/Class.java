@@ -26,14 +26,12 @@ public class Class
     public void insertGrade(double gr)
     {
         grades.add(gr);
-        Collections.sort(grades, Collections.reverseOrder());
     }
 
     /*----------------------------------------------*/
     public void insertGrades(ArrayList<Double> gr)
     {
         this.grades = gr;
-        Collections.sort(grades, Collections.reverseOrder());
     }
 
     /*----------------------------------------------*/

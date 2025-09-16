@@ -47,8 +47,8 @@ public class Menu
             case 1: this.addStudent();   break;
             case 2: this.addClass();     break;
             case 3: this.viewStudents(); break;
-            case 4: break;
-            case 5: break;
+            case 4: this.viewClasses();  break;
+            case 5: this.viewGrades();   break;
             case 6: System.exit(0);
             default: error(">> Opcao invalida!\n"); break;
         }
@@ -84,7 +84,7 @@ public class Menu
     private void viewStudents()
     {
         this.clearScreen();
-        System.out.println("-- Todos os Alunos --\n\n");
+        System.out.println("-- Todos os Alunos --\n");
         int count = 0;
         for (String name : this.database.getStudentNames()) {
             System.out.printf("%02d - %s\n", count++, name);
@@ -114,10 +114,62 @@ public class Menu
             break;
         }
 
+        System.out.print("\n");
         for (Class c : std.getClasses()) {
-            System.out.printf("* %s\n", c.getName());
+            System.out.printf("- %s\n", c.getName());
         }
 
+        this.waitKey();
+    }
+
+    /*----------------------------------------------*/
+    private void viewGrades()
+    {
+        Student std = null;
+
+        while (true)
+        {
+            this.clearScreen();
+
+            System.out.print("| digite o nome do estudante: ");
+            String name = SCANNER.nextLine();
+
+            if (!this.database.studentExists(name)) {
+                System.out.println(">> estudante nao esta cadastrado!");
+                waitKey();
+                continue;
+            } else {
+                std = database.getStudent(name);
+                break;
+            }
+        }
+
+        Class cl = null;
+        while (true)
+        {
+            System.out.print("| digite o nome da disciplina: ");
+            String name = SCANNER.nextLine();
+
+            if (!this.database.classExists(std.getName(), name)) {
+                System.out.println(">> disciplina nao esta cadastrada!");
+                waitKey();
+                continue;
+            } else {
+                cl = std.getClass(name);
+                break;
+            }
+        }
+
+        double sum = 0;
+        System.out.println("\nNotas:");
+        for (int i = 0; i < cl.getNumGrades(); ++i) {
+            double g = cl.getGrade(i);
+            sum += g;
+            System.out.printf("Nota %d: %.2f\n", (i+1), g);
+        }
+
+        double mean = sum / (double)cl.getNumGrades();
+        System.out.printf("Media: %.2f", mean);
         this.waitKey();
     }
 
